@@ -19,6 +19,8 @@ cv2.createTrackbar("Threshold2", "Parameters", 134, 255, empty)
 def getContours(img, imgContour):
     contours, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, 
                                            cv2.CHAIN_APPROX_NONE)
+    
+    # circle = cv2.HoughCircles(gray, )
 
 
     for cnt in contours:
@@ -52,8 +54,6 @@ def getContours(img, imgContour):
                    cv2.putText(imgContour, "Octagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
                    break 
-
-        
 
 
 while True:
