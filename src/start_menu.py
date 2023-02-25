@@ -6,6 +6,7 @@ from pygame_menu import themes
 pygame.init()
 pygame.display.set_caption("Shape It!")
 surface = pygame.display.set_mode((1920, 1080))
+width, height = pygame.display.get_surface().get_size()
 
 def difficulty(value, difficulty):
     print(value)
@@ -18,18 +19,18 @@ def level_menu():
     mainmenu._open(level)
 
 #adds basic menu layout
-mainmenu = pygame_menu.Menu('WELCOME TO SHAPE IT!', 1920, 1080, theme=themes.THEME_GREEN)
+mainmenu = pygame_menu.Menu('WELCOME TO SHAPE IT!', width, height, theme=themes.THEME_GREEN)
 mainmenu.add.text_input('Name: ', default='insert name here', maxchar=20)
 mainmenu.add.button('Play', start)
 mainmenu.add.button('Select Difficulty', level_menu)
 mainmenu.add.button('Quit', pygame_menu.events.EXIT)
  
 #lets you change the difficuty
-level = pygame_menu.Menu('Select a Difficulty', 1920, 1080, theme=themes.THEME_BLUE)
+level = pygame_menu.Menu('Select a Difficulty', width, height, theme=themes.THEME_BLUE)
 level.add.selector('Difficulty :', [('Learning', 1), ('Challenge', 2)], onchange=difficulty)
 
 #loading bar
-loading = pygame_menu.Menu('Loading...', 1920, 1080, theme=themes.THEME_DARK)
+loading = pygame_menu.Menu('Loading...', width, height, theme=themes.THEME_DARK)
 loading.add.progress_bar("Progress", progressbar_id = "1", default=0, width = 200, )
  
 arrow = pygame_menu.widgets.LeftArrowSelection(arrow_size = (10, 15))
