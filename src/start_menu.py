@@ -7,6 +7,7 @@ pygame.init()
 pygame.display.set_caption("Shape It!")
 surface = pygame.display.set_mode((1920, 1080))
 width, height = pygame.display.get_surface().get_size()
+print(width, height)
 
 def difficulty(value, difficulty):
     print(value)
