@@ -3,7 +3,7 @@ import numpy as np
 
 
 def main():
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -48,9 +48,11 @@ def main():
         # result = cv2.bitwise_and(frame, frame, mask=mask)
         # cv2.imshow('frame', result)
         # cv2.imshow('mask', mask)
+        point = "Points: "
 
         cv2.rectangle(frame, (cx - 220, 10), (cx + 200, 120), (255, 255, 255), -1)
         cv2.putText(frame, color, (cx - 200, 100), 0, 3, (b, g, r), 5)
+        #cv2.putText(frame, point, 0, 0, 3, 0, 5)
         cv2.circle(frame, (cx, cy), 5, (25, 25, 25), 3)
         cv2.imshow("Frame", frame)
         key = cv2.waitKey(1)
