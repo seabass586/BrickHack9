@@ -2,6 +2,7 @@ import pygame
 import cv2
 import numpy as np
 import random   
+import start_menu
 
 IMAGE_TIME = 10
 
@@ -85,7 +86,7 @@ def clear_dict(shapeDict):
     return shapeDict
 
 
-def game_loop(webcam):
+def game_loop(webcam, mode):
     pygame.init()
     width, height = 1280, 720
 
@@ -110,7 +111,11 @@ def game_loop(webcam):
     shapeDict = {'triangle': 0, 'square': 0, 'pentagon': 0, 
                  'hexagon': 0, 'octagon': 0}
     
-    bg = pygame.image.load("assets/BORDER_GRAD.png").convert()
+    if mode == 1:
+        bg = pygame.image.load("assets/BORDER_GRAD.png").convert()
+    else:
+         bg = pygame.image.load("assets/BORDER_GRAD_REDDD.png").convert()
+    
     tessy_n = pygame.image.load("assets/tessy1.png")
     tessy_s = pygame.image.load("assets/thumbsup.png")
     tessy_f = pygame.image.load("assets/thumbsdown.png")
@@ -123,6 +128,8 @@ def game_loop(webcam):
 
     goodbad = True
 
+    points = 0
+
     drawing = True
     task = get_shape()
     request = font.render("Draw me a... " + task, True, (255, 255, 255))
@@ -134,6 +141,8 @@ def game_loop(webcam):
                 pygame.quit()
             if event.type == pygame.USEREVENT:
                 counter -= 1
+                if mode == 1:
+                    counter = 1000
                 if img_check != 0:
                     img_check -= 1
                 text = font.render(str(counter), True, (0, 128, 0))
@@ -160,33 +169,29 @@ def game_loop(webcam):
 
         if check(shapeDict, task) == True:
             goodbad = True
-            img_check = 4
+            points+=1
+            img_check = 2
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
-            if offset !=18:
-                offset+=2
-            counter = 25 - offset + 4
+            counter += 2
             print(task)
         elif check(shapeDict, task) == False:
             goodbad = False
-            img_check = 4
+            img_check = 2
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
-            if offset !=18:
-                offset+=2
-            counter = 25 - offset + 4
+            counter -= 5
             print(task)
 
-        if counter == 0:
-            img_check = 4
+        if counter <= 0 and mode == 2:
+            img_check = 2
             print("no time, you lose!")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             print(task)
-            start = False
-            pygame.quit()
+            start_menu.lose_screen()
         
 
         imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
@@ -198,7 +203,8 @@ def game_loop(webcam):
         window.blit(bg, (0,0))
         window.blit(frame, (155, 90))
 
-        window.blit(text, (0,0))
+        if mode != 1:
+            window.blit(text, (640,25))
         window.blit(request, (440, 670))
 
         if img_check != 0:
@@ -216,7 +222,7 @@ def game_loop(webcam):
         clock.tick(fps)
 
 
-def run():
+def run(mode):
     frameWidth = 1180
     frameHeight = 620
     cap = cv2.VideoCapture(0)
@@ -228,5 +234,6 @@ def run():
     cv2.createTrackbar("Threshold1", "Parameters", 255, 255, empty)
     cv2.createTrackbar("Threshold2", "Parameters", 116, 255, empty)
 
-    game_loop(cap)
+    game_loop(cap, mode)
 
+run(2)
