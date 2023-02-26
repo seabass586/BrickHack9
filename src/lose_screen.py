@@ -1,18 +1,16 @@
 import pygame
-import start_menu
 import sys
 
-res = 1280, 720
-screen = pygame.display.set_mode(res) 
-smallfont = pygame.font.SysFont('Comics Sans MS',40) 
-bigfont = pygame.font.SysFont('Roboto', 80)
+def lose(points):
+    res = 1280, 720
+    screen = pygame.display.set_mode(res) 
+    bigfont = pygame.font.SysFont('Roboto', 80)
 
-WHITE = (255,255,255) 
-GREY = (170,170,170)
-DARK_GREY = (100,100,100)
-BLACK = (0,0,0)
+    WHITE = (255,255,255) 
+    GREY = (170,170,170)
+    DARK_GREY = (100,100,100)
+    BLACK = (0,0,0)
 
-def lose_screen(points):
     new_bg = pygame.image.load("assets/timesup.png")
 
     while True:  
@@ -21,13 +19,13 @@ def lose_screen(points):
                 pygame.quit()   
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 415 <= mouse[1] <= 415+80: 
-                   start_menu.start_screen()
+                   print("hi")
             if ev.type == pygame.MOUSEBUTTONDOWN: 
                 if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
                     pygame.quit()
                     sys.exit()
 
-        text = bigfont.render("Points: " + points, True, WHITE)
+        text = bigfont.render("Points: " + str(points), True, WHITE)
 
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(new_bg, (1280, 720))
@@ -55,6 +53,4 @@ def lose_screen(points):
         pygame.display.update() 
 
 def main():
-    lose_screen()
-
-main()
+    lose(0)

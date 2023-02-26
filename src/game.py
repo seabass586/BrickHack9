@@ -2,6 +2,7 @@ import pygame
 import cv2
 import numpy as np
 import random   
+import lose_screen as ls
 
 IMAGE_TIME = 10
 
@@ -120,6 +121,7 @@ def game_loop(webcam, mode):
     tessy_f = pygame.image.load("assets/thumbsdown.png")
     circle_g = pygame.image.load("assets/circle.png")
     ecks = pygame.image.load("assets/x.png")
+    cloc = pygame.image.load("assets/clock.png")
 
     bg_border = pygame.draw.rect(window, [  0,  0, 223], (1000,1000,25,25), 0)
 
@@ -190,7 +192,8 @@ def game_loop(webcam, mode):
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             print(task)
-            start_menu.lose_screen(points)
+            ls.lose(points)
+            
         
 
         imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
@@ -202,8 +205,10 @@ def game_loop(webcam, mode):
         window.blit(bg, (0,0))
         window.blit(frame, (155, 90))
 
+        window.blit(cloc, (0,0))
+
         if mode != 1:
-            window.blit(text, (640,25))
+            window.blit(text, (615,25))
         window.blit(request, (440, 670))
 
         if img_check != 0:
@@ -235,4 +240,4 @@ def run(mode):
 
     game_loop(cap, mode)
 
-run(2)
+#run(2)
