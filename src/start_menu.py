@@ -1,7 +1,7 @@
 import pygame 
 import sys
 import moviepy.editor
-import main 
+import game 
 
 pygame.init() 
 pygame.display.set_caption("Shape It!")
@@ -25,7 +25,8 @@ def start_screen():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     if difficulty == 1:
-                        game
+                        game.run()
+                        break
                     if difficulty == 2:
                         print("Challenge Mode")
             if ev.type == pygame.MOUSEBUTTONDOWN:
