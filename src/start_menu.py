@@ -1,6 +1,6 @@
 import pygame 
 import sys
-import moviepy.editor
+from moviepy.editor import *
 import game 
 
 pygame.init() 
@@ -143,12 +143,12 @@ def difficulty_screen():
         pygame.display.update() 
 
 def intro_scene():
-    video = moviepy.editor.VideoFileClip("assets/intro.mov")
+    video = VideoFileClip("assets/intro.mov")
     video2 = video.resize((1280, 720))
     video2.preview()
 
 def loading_screen():
-    video = moviepy.editor.VideoFileClip("assets/loading.mov")
+    video = VideoFileClip("assets/loading.mov")
     video2 = video.resize((1280, 720))
     video2.preview()  
 
