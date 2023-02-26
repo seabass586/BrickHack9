@@ -143,9 +143,14 @@ def difficulty_screen():
         pygame.display.update() 
 
 def intro_scene():
-    video = VideoFileClip("assets/intro.mov")
-    video2 = video.resize((1280, 720))
-    video2.preview()
+    video = VideoFileClip("assets/tessy_intro.mp4")
+    audio = AudioFileClip("assets/intro_slow.mp3")
+    f_video = video.set_audio(audio)
+    f_video.write_videofile("assets/video2.mp4")
+    
+    video2 = VideoFileClip("assets/video2.mp4")
+    video3 = video2.resize((1280,720))
+    video3.preview()
 
 def loading_screen():
     video = VideoFileClip("assets/loading.mov")
@@ -153,6 +158,6 @@ def loading_screen():
     video2.preview()  
 
 def main():
-    intro_scene()
+    start_screen()
 
 main()
