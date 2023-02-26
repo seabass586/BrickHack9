@@ -108,6 +108,8 @@ def difficulty_screen():
                 if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
                     start_screen()    
 
+        text = smallfont.render(" ", True, BLACK)
+
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(bg, (1280, 720))
         screen.blit(new, (0, 0))
@@ -115,6 +117,7 @@ def difficulty_screen():
         if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
             img = pygame.image.load('assets/education_selected.png')
             img = pygame.transform.scale(img, (200, 90))
+            text = smallfont.render("No time limit!", True, BLACK)
             screen.blit(img,(545,320))
         else: 
             img = pygame.image.load('assets/education_button.png')
@@ -123,6 +126,7 @@ def difficulty_screen():
         if 550 <= mouse[0] <= 600+140 and 435 <= mouse[1] <= 435+80: 
             img = pygame.image.load('assets/challenge_selected.png')
             img = pygame.transform.scale(img, (200, 90))
+            text = smallfont.render("A timed challenge!", True, BLACK)
             screen.blit(img,(545,435))
         else: 
             img = pygame.image.load('assets/challenge_button.png')
@@ -136,6 +140,8 @@ def difficulty_screen():
             img = pygame.image.load('assets/back_button.png')
             img = pygame.transform.scale(img, (200, 90))
             screen.blit(img,(545,545))
+
+        screen.blit(text,(750, 680))
 
         pygame.display.update() 
 
@@ -159,8 +165,6 @@ def lose_screen():
                     pygame.quit()
                     sys.exit()
 
-        text = smallfont.render("Mode: ", True, BLACK)
-
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(new_bg, (1280, 720))
         screen.blit(new, (0, 0))
@@ -181,8 +185,6 @@ def lose_screen():
             img = pygame.image.load('assets/exit_button.png')
             img = pygame.transform.scale(img, (200, 90))
             screen.blit(img,(545,545)) 
-
-        screen.blit(text,(950,680))
 
         pygame.display.update() 
 
