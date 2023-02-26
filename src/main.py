@@ -25,27 +25,22 @@ def getContours(img, imgContour, shapeDict):
                 case 3:
                     cv2.putText(imgContour, "Triangle", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    shapeDict['Triangle'] += 1
                     break 
                 case 4:
                     cv2.putText(imgContour, "Square", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    shapeDict['Square'] += 1
                     break 
                 case 5:
                     cv2.putText(imgContour, "Pentagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    shapeDict['Pentagon'] += 1
                     break 
                 case 6:
                     cv2.putText(imgContour, "Hexagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    shapeDict['Hexagon'] += 1
                     break 
                 case 8:
                     cv2.putText(imgContour, "Octagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    shapeDict['Octagon'] += 1
                     break 
 
 
@@ -59,8 +54,6 @@ def game_loop(webcam):
     fps = 30
     clock = pygame.time.Clock()
 
-    shapeDict = {'Triangle': 0, 'Square': 0, 'Pentagon': 0, 
-                     'Hexagon': 0, 'Octagon': 0}
 
     start = True
     while start:
@@ -88,14 +81,10 @@ def game_loop(webcam):
         kernel = np.ones((5, 5))
         imgDil = cv2.dilate(imgCanny, kernel, iterations=1)
 
-        getContours(imgDil, imgContour, shapeDict)
+        getContours(imgDil, imgContour)
 
-        check(shapeDict)
+        imgContour = np.rot90(cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)) 
 
-        imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
-        imgContour = np.rot90(imgContour) 
-
-        frame = pygame.surfarray.make_surface(imgContour).convert()
         frame = pygame.transform.flip(frame, True, False)
 
         window.blit(frame, (0,0))

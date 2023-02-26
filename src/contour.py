@@ -19,6 +19,9 @@ cv2.createTrackbar("Threshold2", "Parameters", 134, 255, empty)
 def getContours(img, imgContour):
     contours, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, 
                                            cv2.CHAIN_APPROX_NONE)
+    
+    # circle = cv2.HoughCircles(gray, )
+
 
     for cnt in contours:
         area = cv2.contourArea(cnt)
@@ -32,29 +35,25 @@ def getContours(img, imgContour):
 
             match len(approx):
                 case 3:
-                    cv2.putText(imgContour, "Triangle", (x + w + 20, y + 20), 
+                   cv2.putText(imgContour, "Triangle", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    break 
+                   break 
                 case 4:
-                    cv2.putText(imgContour, "Square", (x + w + 20, y + 20), 
+                   cv2.putText(imgContour, "Square", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    break 
+                   break 
                 case 5:
-                    cv2.putText(imgContour, "Pentagon", (x + w + 20, y + 20), 
+                   cv2.putText(imgContour, "Pentagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    break 
+                   break 
                 case 6:
-                    cv2.putText(imgContour, "Hexagon", (x + w + 20, y + 20), 
+                   cv2.putText(imgContour, "Hexagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    break 
+                   break 
                 case 8:
-                    cv2.putText(imgContour, "Octagon", (x + w + 20, y + 20), 
+                   cv2.putText(imgContour, "Octagon", (x + w + 20, y + 20), 
                             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                    break 
-                # case _:
-                #     cv2.putText(imgContour, "Circle", (x + w + 20, y + 20), 
-                #             cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
-                #     break 
+                   break 
 
 
 while True:
