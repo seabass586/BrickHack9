@@ -2,7 +2,6 @@ import pygame
 import cv2
 import numpy as np
 import random   
-import start_menu
 
 IMAGE_TIME = 10
 
@@ -191,7 +190,7 @@ def game_loop(webcam, mode):
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             print(task)
-            start_menu.lose_screen()
+            start_menu.lose_screen(points)
         
 
         imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
