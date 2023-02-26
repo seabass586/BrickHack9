@@ -2,6 +2,7 @@ import pygame
 import cv2
 import numpy as np
 import random   
+import start_menu
 
 IMAGE_TIME = 10
 
@@ -127,6 +128,8 @@ def game_loop(webcam, mode):
 
     goodbad = True
 
+    points = 0
+
     drawing = True
     task = get_shape()
     request = font.render("Draw me a... " + task, True, (255, 255, 255))
@@ -166,13 +169,12 @@ def game_loop(webcam, mode):
 
         if check(shapeDict, task) == True:
             goodbad = True
+            points+=1
             img_check = 2
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
-            if offset !=18:
-                offset+=2
-            counter = 25 - offset + 4
+            counter += 2
             print(task)
         elif check(shapeDict, task) == False:
             goodbad = False
@@ -180,19 +182,16 @@ def game_loop(webcam, mode):
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
-            if offset !=18:
-                offset+=2
-            counter = 25 - offset + 4
+            counter -= 5
             print(task)
 
-        if counter == 0 and mode == 2:
+        if counter <= 0 and mode == 2:
             img_check = 2
             print("no time, you lose!")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             print(task)
-            start = False
-            pygame.quit()
+            start_menu.lose_screen()
         
 
         imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
@@ -205,7 +204,7 @@ def game_loop(webcam, mode):
         window.blit(frame, (155, 90))
 
         if mode != 1:
-            window.blit(text, (0,0))
+            window.blit(text, (640,25))
         window.blit(request, (440, 670))
 
         if img_check != 0:
@@ -237,3 +236,4 @@ def run(mode):
 
     game_loop(cap, mode)
 
+run(2)
