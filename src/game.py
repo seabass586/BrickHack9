@@ -59,7 +59,7 @@ def getContours(img, imgContour, shapeDict):
 def check(shapeDict, target):
 
     for shape in shapeDict:
-        if shapeDict[shape] >= 50:
+        if shapeDict[shape] >= 30:
             if shape == target:
                 return True
             elif shapeDict[shape] >= 80 and shape != target:
@@ -175,7 +175,7 @@ def game_loop(webcam, mode):
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
-            counter += 2
+            counter += 6
             print(task)
         elif check(shapeDict, task) == False:
             goodbad = False
@@ -205,10 +205,10 @@ def game_loop(webcam, mode):
         window.blit(bg, (0,0))
         window.blit(frame, (155, 90))
 
-        window.blit(cloc, (0,0))
-
         if mode != 1:
+            window.blit(cloc, (0,0))
             window.blit(text, (615,25))
+ 
         window.blit(request, (440, 670))
 
         if img_check != 0:
