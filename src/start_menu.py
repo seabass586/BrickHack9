@@ -1,5 +1,6 @@
 import pygame 
 import sys
+import moviepy.editor
   
 pygame.init() 
 pygame.display.set_caption("Shape It!")
@@ -125,7 +126,12 @@ def difficulty_screen():
 
         pygame.display.update() 
 
+def loading_screen():
+    while True:
+        video = moviepy.editor.VideoFileClip("assets/loading.mov")
+        video.preview()
+
 def main():
-    start_screen()
+    loading_bar()
 
 main()
