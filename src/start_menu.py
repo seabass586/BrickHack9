@@ -8,6 +8,7 @@ bg = pygame.image.load("assets/main_screen.png")
 WHITE = (255,255,255) 
 GREY = (170,170,170)
 DARK_GREY = (100,100,100)
+BLACK = (0,0,0)
 difficulty = 0 
 
 res = 1280, 720
@@ -33,9 +34,16 @@ def start_screen():
                     pygame.quit()
                     sys.exit()
 
+        text = smallfont.render("Mode: ", True, BLACK)
+
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(bg, (1280, 720))
         screen.blit(new, (0, 0))
+
+        if difficulty == 1:
+            text = smallfont.render("Mode: Education", True, BLACK)
+        if difficulty == 2:
+            text = smallfont.render("Mode: Challenge", True, BLACK)
 
         if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
             img = pygame.image.load('assets/start_selected.png')
@@ -61,6 +69,8 @@ def start_screen():
             img = pygame.image.load('assets/exit_button.png')
             img = pygame.transform.scale(img, (200, 90))
             screen.blit(img,(545,545)) 
+
+        screen.blit(text,(950,680))
 
         pygame.display.update() 
 
