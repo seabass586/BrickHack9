@@ -2,6 +2,7 @@ import pygame
 import sys
 import moviepy.editor
 import game 
+import mouse
 
 pygame.init() 
 pygame.display.set_caption("Shape It!")
@@ -25,17 +26,13 @@ def start_screen():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     if difficulty == 1:
-                        video = moviepy.editor.VideoFileClip("assets/intro.mov")
-                        video2 = video.resize((1280, 720))
-                        video2.preview()
+                        intro_scene()
                         loading_screen()
                         pygame.quit()
                         game.run()
                         break
                     if difficulty == 2:
-                        video = moviepy.editor.VideoFileClip("assets/intro.mov")
-                        video2 = video.resize((1280, 720))
-                        video2.preview()
+                        intro_scene()
                         loading_screen()
                         pygame.quit()
                         game.run()
@@ -145,13 +142,18 @@ def difficulty_screen():
 
         pygame.display.update() 
 
+def intro_scene():
+    video = moviepy.editor.VideoFileClip("assets/intro.mov")
+    video2 = video.resize((1280, 720))
+    video2.preview()
+
 def loading_screen():
-        video = moviepy.editor.VideoFileClip("assets/loading.mov")
-        video2 = video.resize((1280, 720))
-        video2.preview()
+    video = moviepy.editor.VideoFileClip("assets/loading.mov")
+    video2 = video.resize((1280, 720))
+    video2.preview()  
 
 def lose_screen():
-    new_bg = pygame.image.load("assets/timesup_placeholder.png")
+    new_bg = pygame.image.load("assets/timesup.png")
 
     while True:  
         for ev in pygame.event.get():     
@@ -161,7 +163,7 @@ def lose_screen():
                 if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                    start_screen()
             if ev.type == pygame.MOUSEBUTTONDOWN: 
-                if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
+                if 550 <= mouse[0] <= 610+140 and 435 <= mouse[1] <= 435+80: 
                     pygame.quit()
                     sys.exit()
 
@@ -170,21 +172,21 @@ def lose_screen():
         screen.blit(new, (0, 0))
 
         if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
-            img = pygame.image.load('assets/start_selected.png')
+            img = pygame.image.load('assets/home_selected.png')
             img = pygame.transform.scale(img, (200, 90))
             screen.blit(img,(545,320))
         else: 
-            img = pygame.image.load('assets/start_button.png')
+            img = pygame.image.load('assets/home_button.png')
             img = pygame.transform.scale(img, (200, 90))
             screen.blit(img,(545,320))
-        if 550 <= mouse[0] <= 600+140 and 535 <= mouse[1] <= 535+80: 
+        if 550 <= mouse[0] <= 600+140 and 435 <= mouse[1] <= 435+80: 
             img = pygame.image.load('assets/exit_selected.png')
             img = pygame.transform.scale(img, (200, 90))
-            screen.blit(img,(545,545))
+            screen.blit(img,(545,445))
         else: 
             img = pygame.image.load('assets/exit_button.png')
             img = pygame.transform.scale(img, (200, 90))
-            screen.blit(img,(545,545)) 
+            screen.blit(img,(545,445)) 
 
         pygame.display.update() 
 
