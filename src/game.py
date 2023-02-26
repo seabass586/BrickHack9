@@ -95,6 +95,8 @@ def game_loop(webcam):
     fps = 30
     clock = pygame.time.Clock()
     counter = 25
+    img_check = 0
+
     offset = 0
     font = pygame.font.SysFont('Consolas', 30)
     text = font.render(str(counter), True, (0, 128, 0))
@@ -109,11 +111,17 @@ def game_loop(webcam):
                  'hexagon': 0, 'octagon': 0}
     
     bg = pygame.image.load("assets/BORDER_GRAD.png").convert()
-    tessy1 = pygame.image.load("assets/tessy1.png")
+    tessy_n = pygame.image.load("assets/tessy1.png")
+    tessy_s = pygame.image.load("assets/thumbsup.png")
+    tessy_f = pygame.image.load("assets/thumbsdown.png")
+    circle_g = pygame.image.load("assets/circle.png")
+    ecks = pygame.image.load("assets/x.png")
+
     bg_border = pygame.draw.rect(window, [  0,  0, 223], (1000,1000,25,25), 0)
 
     start = True
-    on_time = True
+
+    goodbad = True
 
     drawing = True
     task = get_shape()
@@ -126,6 +134,8 @@ def game_loop(webcam):
                 pygame.quit()
             if event.type == pygame.USEREVENT:
                 counter -= 1
+                if img_check != 0:
+                    img_check -= 1
                 text = font.render(str(counter), True, (0, 128, 0))
 
         # OpenCV
@@ -149,7 +159,8 @@ def game_loop(webcam):
         getContours(imgDil, imgContour, shapeDict)
 
         if check(shapeDict, task) == True:
-            print ("Nice!!")
+            goodbad = True
+            img_check = 4
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
@@ -158,7 +169,8 @@ def game_loop(webcam):
             counter = 25 - offset + 4
             print(task)
         elif check(shapeDict, task) == False:
-            print ("NO!!!!! >:(")
+            goodbad = False
+            img_check = 4
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             request = font.render("Draw me a... " + task, True, (0, 0, 0))
@@ -168,13 +180,14 @@ def game_loop(webcam):
             print(task)
 
         if counter == 0:
+            img_check = 4
             print("no time, you lose!")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
             print(task)
             start = False
             pygame.quit()
-
+        
 
         imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
         imgContour = np.rot90(imgContour) 
@@ -187,7 +200,16 @@ def game_loop(webcam):
 
         window.blit(text, (0,0))
         window.blit(request, (440, 670))
-        window.blit(tessy1, (0,0))
+
+        if img_check != 0:
+            if goodbad == False:
+                window.blit(tessy_f, (0,0))
+                window.blit(ecks, (0,0))
+            if goodbad == True:
+                window.blit(tessy_s, (0,0))
+                window.blit(circle_g, (0,0))
+        else:
+            window.blit(tessy_n, (0,0))
 
         pygame.display.flip()
 
