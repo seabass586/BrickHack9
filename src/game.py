@@ -190,7 +190,7 @@ def game_loop(webcam):
         clock.tick(fps)
 
 
-def main():
+def run():
     frameWidth = 1180
     frameHeight = 620
     cap = cv2.VideoCapture(0)
@@ -203,7 +203,4 @@ def main():
     cv2.createTrackbar("Threshold2", "Parameters", 116, 255, empty)
 
     game_loop(cap)
-
-
-main()
 
