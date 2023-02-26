@@ -160,10 +160,10 @@ def lose_screen():
             if ev.type == pygame.QUIT: 
                 pygame.quit()   
             if ev.type == pygame.MOUSEBUTTONDOWN:
-                if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
+                if 550 <= mouse[0] <= 610+140 and 415 <= mouse[1] <= 415+80: 
                    start_screen()
             if ev.type == pygame.MOUSEBUTTONDOWN: 
-                if 550 <= mouse[0] <= 610+140 and 435 <= mouse[1] <= 435+80: 
+                if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
                     pygame.quit()
                     sys.exit()
 
@@ -171,26 +171,26 @@ def lose_screen():
         new = pygame.transform.scale(new_bg, (1280, 720))
         screen.blit(new, (0, 0))
 
-        if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
+        if 550 <= mouse[0] <= 600+140 and 415 <= mouse[1] <= 415+80: 
             img = pygame.image.load('assets/home_selected.png')
             img = pygame.transform.scale(img, (200, 90))
-            screen.blit(img,(545,320))
+            screen.blit(img,(545,415))
         else: 
             img = pygame.image.load('assets/home_button.png')
             img = pygame.transform.scale(img, (200, 90))
-            screen.blit(img,(545,320))
-        if 550 <= mouse[0] <= 600+140 and 435 <= mouse[1] <= 435+80: 
+            screen.blit(img,(545,415))
+        if 550 <= mouse[0] <= 600+140 and 535 <= mouse[1] <= 535+80: 
             img = pygame.image.load('assets/exit_selected.png')
             img = pygame.transform.scale(img, (200, 90))
-            screen.blit(img,(545,445))
+            screen.blit(img,(545,535))
         else: 
             img = pygame.image.load('assets/exit_button.png')
             img = pygame.transform.scale(img, (200, 90))
-            screen.blit(img,(545,445)) 
+            screen.blit(img,(545,535)) 
 
         pygame.display.update() 
 
 def main():
-    start_screen()
+    lose_screen()
 
 main()
