@@ -7,7 +7,7 @@ def empty(a):
     pass
 
 
-def getContours(img, imgContour):
+def getContours(img, imgContour, shapeDict):
     contours, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, 
                                            cv2.CHAIN_APPROX_NONE)
 
