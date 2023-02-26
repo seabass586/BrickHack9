@@ -49,6 +49,10 @@ def getContours(img, imgContour, shapeDict):
                     break 
 
 
+def check(shapeDict):
+    pass
+
+
 def game_loop(webcam):
     pygame.init()
     width, height = 1280, 720
