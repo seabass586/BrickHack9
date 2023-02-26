@@ -8,6 +8,7 @@ bg = pygame.image.load("assets/main_screen.png")
 WHITE = (255,255,255) 
 GREY = (170,170,170)
 DARK_GREY = (100,100,100)
+BLACK = (0,0,0)
 difficulty = 0 
 
 res = 1280, 720
@@ -20,50 +21,60 @@ def start_screen():
             if ev.type == pygame.QUIT: 
                 pygame.quit()   
             if ev.type == pygame.MOUSEBUTTONDOWN:
-                if 610 <= mouse[0] <= 610+140 and 425 <= mouse[1] <= 490: 
+                if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     if difficulty == 1:
                         print("Education Mode")
                     if difficulty == 2:
                         print("Challenge Mode")
             if ev.type == pygame.MOUSEBUTTONDOWN:
-                if 610 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 590: 
+                if 550 <= mouse[0] <= 610+140 and 435 <= mouse[1] <= 435+80: 
                     difficulty_screen()
             if ev.type == pygame.MOUSEBUTTONDOWN: 
-                if 610 <= mouse[0] <= 610+140 and 575 <= mouse[1] <= 650: 
+                if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
                     pygame.quit()
                     sys.exit()
+
+        text = smallfont.render("Mode: ", True, BLACK)
 
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(bg, (1280, 720))
         screen.blit(new, (0, 0))
 
-        if 610 <= mouse[0] <= 610+140 and 450 <= mouse[1] <= 450+40: 
+        if difficulty == 1:
+            text = smallfont.render("Mode: Education", True, BLACK)
+        if difficulty == 2:
+            text = smallfont.render("Mode: Challenge", True, BLACK)
+
+        if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
             img = pygame.image.load('assets/start_selected.png')
-            screen.blit(img,(575,440))
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,320))
         else: 
             img = pygame.image.load('assets/start_button.png')
-            screen.blit(img,(575,440))
-
-        if 610 <= mouse[0] <= 610+140 and 550 <= mouse[1] <= 550+40: 
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,320))
+        if 550 <= mouse[0] <= 600+140 and 435 <= mouse[1] <= 435+80: 
             img = pygame.image.load('assets/mode_selected.png')
-            screen.blit(img,(575,535))
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,435))
         else: 
             img = pygame.image.load('assets/mode_button.png')
-            screen.blit(img,(575,535))
-        if 610 <= mouse[0] <= 610+140 and 625 <= mouse[1] <= 650+40: 
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,435))
+        if 550 <= mouse[0] <= 600+140 and 535 <= mouse[1] <= 535+80: 
             img = pygame.image.load('assets/exit_selected.png')
-            screen.blit(img,(575,615))
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,545))
         else: 
             img = pygame.image.load('assets/exit_button.png')
-            screen.blit(img,(575,615)) 
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,545)) 
+
+        screen.blit(text,(950,680))
 
         pygame.display.update() 
 
 def difficulty_screen():
-    text1 = smallfont.render("Educational", True, WHITE)
-    text2 = smallfont.render("Challenge", True, WHITE)
-    text3 = smallfont.render('Go Back' , True , WHITE) 
-
     global difficulty
 
     while True:  
@@ -71,40 +82,46 @@ def difficulty_screen():
             if ev.type == pygame.QUIT: 
                 pygame.quit()   
             if ev.type == pygame.MOUSEBUTTONDOWN:
-                if 610 <= mouse[0] <= 610+140 and 425 <= mouse[1] <= 490: 
+                if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     global difficulty
                     difficulty = 1
                     start_screen()
             if ev.type == pygame.MOUSEBUTTONDOWN:
-                if 610 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 590: 
+                if 550 <= mouse[0] <= 610+140 and 435 <= mouse[1] <= 435+80: 
                     difficulty = 2
                     start_screen()
             if ev.type == pygame.MOUSEBUTTONDOWN: 
-                if 610 <= mouse[0] <= 610+140 and 575 <= mouse[1] <= 650: 
-                    start_screen()
+                if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
+                    start_screen()    
 
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(bg, (1280, 720))
         screen.blit(new, (0, 0))
 
-        if 610 <= mouse[0] <= 610+140 and 450 <= mouse[1] <= 450+40: 
-            pygame.draw.rect(screen, GREY,[565,440,175,40]) 
+        if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
+            img = pygame.image.load('assets/education_selected.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,320))
         else: 
-            pygame.draw.rect(screen, DARK_GREY, [565,440,175,40]) 
-
-        if 610 <= mouse[0] <= 610+140 and 550 <= mouse[1] <= 550+40: 
-            pygame.draw.rect(screen, GREY,[565,535,175,40]) 
+            img = pygame.image.load('assets/education_button.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,320))
+        if 550 <= mouse[0] <= 600+140 and 435 <= mouse[1] <= 435+80: 
+            img = pygame.image.load('assets/challenge_selected.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,435))
         else: 
-            pygame.draw.rect(screen,DARK_GREY,[565,535,175,40]) 
-
-        if 610 <= mouse[0] <= 610+140 and 625 <= mouse[1] <= 650+40: 
-            pygame.draw.rect(screen, GREY,[565,615,175,40]) 
+            img = pygame.image.load('assets/challenge_button.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,435))
+        if 550 <= mouse[0] <= 600+140 and 535 <= mouse[1] <= 535+80: 
+            img = pygame.image.load('assets/back_selected.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,545))
         else: 
-            pygame.draw.rect(screen,DARK_GREY,[565,615,175,40]) 
-
-        screen.blit(text1, (575, 445)) 
-        screen.blit(text2, (580, 545)) 
-        screen.blit(text3, (585, 625)) 
+            img = pygame.image.load('assets/back_button.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,545))
 
         pygame.display.update() 
 
