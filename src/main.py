@@ -93,14 +93,28 @@ def game_loop(webcam):
 
     fps = 30
     clock = pygame.time.Clock()
+    counter = 25
+    offset = 0
+    font = pygame.font.SysFont('Consolas', 30)
+    text = font.render(str(counter), True, (0, 128, 0))
+
+
+    time_delay = 1000
+    timer_event = pygame.USEREVENT+1
+    pygame.time.set_timer(timer_event, time_delay)
+
+    pygame.time.set_timer(pygame.USEREVENT, time_delay)
 
     shapeDict = {'triangle': 0, 'square': 0, 'pentagon': 0, 
                  'hexagon': 0, 'octagon': 0}
     
     bg = pygame.image.load("src/assets/BORDER_GRAD.png").convert()
-    #bg_border = 
+    tessy1 = pygame.image.load("src/assets/tessy1.png")
+    bg_border = pygame.draw.rect(window, [  0,  0, 223], (1000,1000,25,25), 0)
 
     start = True
+    on_time = True
+
     drawing = True
     task = get_shape()
     print(task)
@@ -110,6 +124,9 @@ def game_loop(webcam):
             if event.type == pygame.QUIT:
                 start = False
                 pygame.quit()
+            if event.type == pygame.USEREVENT:
+                counter -= 1
+                text = font.render(str(counter), True, (0, 128, 0))
 
         # OpenCV
         success, img = webcam.read()
@@ -135,12 +152,24 @@ def game_loop(webcam):
             print ("Nice!!")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
+            offset+=2
+            counter = 25 - offset
             print(task)
         elif check(shapeDict, task) == False:
             print ("NO!!!!! >:(")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
+            offset+=2
+            counter = 25 - offset
             print(task)
+
+        if counter == 0:
+            print("no time, you lose!")
+            shapeDict = clear_dict(shapeDict)
+            task = get_shape()
+            print(task)
+            start = False
+            pygame.quit()
 
 
         imgContour = cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)
@@ -152,7 +181,10 @@ def game_loop(webcam):
         window.blit(bg, (0,0))
         window.blit(frame, (155, 90))
 
-        pygame.display.update()
+        window.blit(text, (0,0))
+        window.blit(tessy1, (0,0))
+
+        pygame.display.flip()
 
         clock.tick(fps)
 
