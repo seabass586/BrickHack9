@@ -81,7 +81,6 @@ def get_shape():
 def clear_dict(shapeDict):
     for shape in shapeDict:
         shapeDict[shape] = 0
-    print(shapeDict)
     return shapeDict
 
 
@@ -97,6 +96,9 @@ def game_loop(webcam):
 
     shapeDict = {'triangle': 0, 'square': 0, 'pentagon': 0, 
                  'hexagon': 0, 'octagon': 0}
+    
+    bg = pygame.image.load("src/assets/BORDER_GRAD.png").convert()
+    #bg_border = 
 
     start = True
     drawing = True
@@ -112,7 +114,6 @@ def game_loop(webcam):
         # OpenCV
         success, img = webcam.read()
         imgContour = img.copy()
-
 
         imgBlur = cv2.GaussianBlur(img, (7, 7), 1)
         imgGray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
@@ -148,6 +149,7 @@ def game_loop(webcam):
         frame = pygame.surfarray.make_surface(imgContour).convert()
         frame = pygame.transform.flip(frame, True, False)
 
+        window.blit(bg, (0,0))
         window.blit(frame, (155, 90))
 
         pygame.display.update()
