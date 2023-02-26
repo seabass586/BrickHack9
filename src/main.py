@@ -8,7 +8,7 @@ def empty(a):
 
 
 def getContours(img, imgContour, shapeDict):
-    contours, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL,
+    contours, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, 
                                            cv2.CHAIN_APPROX_NONE)
 
     for cnt in contours:
@@ -23,25 +23,25 @@ def getContours(img, imgContour, shapeDict):
 
             match len(approx):
                 case 3:
-                    cv2.putText(imgContour, "Triangle", (x + w + 20, y + 20),
-                                cv2.FONT_HERSHEY_COMPLEX, .7, (0, 255, 0), 2)
-                    break
+                    cv2.putText(imgContour, "Triangle", (x + w + 20, y + 20), 
+                            cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
+                    break 
                 case 4:
-                    cv2.putText(imgContour, "Square", (x + w + 20, y + 20),
-                                cv2.FONT_HERSHEY_COMPLEX, .7, (0, 255, 0), 2)
-                    break
+                    cv2.putText(imgContour, "Square", (x + w + 20, y + 20), 
+                            cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
+                    break 
                 case 5:
-                    cv2.putText(imgContour, "Pentagon", (x + w + 20, y + 20),
-                                cv2.FONT_HERSHEY_COMPLEX, .7, (0, 255, 0), 2)
-                    break
+                    cv2.putText(imgContour, "Pentagon", (x + w + 20, y + 20), 
+                            cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
+                    break 
                 case 6:
-                    cv2.putText(imgContour, "Hexagon", (x + w + 20, y + 20),
-                                cv2.FONT_HERSHEY_COMPLEX, .7, (0, 255, 0), 2)
-                    break
+                    cv2.putText(imgContour, "Hexagon", (x + w + 20, y + 20), 
+                            cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
+                    break 
                 case 8:
-                    cv2.putText(imgContour, "Octagon", (x + w + 20, y + 20),
-                                cv2.FONT_HERSHEY_COMPLEX, .7, (0, 255, 0), 2)
-                    break
+                    cv2.putText(imgContour, "Octagon", (x + w + 20, y + 20), 
+                            cv2.FONT_HERSHEY_COMPLEX, .7, (0,255,0), 2)
+                    break 
 
 
 def game_loop(webcam):
@@ -54,12 +54,14 @@ def game_loop(webcam):
     fps = 30
     clock = pygame.time.Clock()
 
+
     start = True
     while start:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 start = False
                 pygame.quit()
+
 
         # OpenCV
         success, img = webcam.read()
@@ -81,21 +83,15 @@ def game_loop(webcam):
 
         getContours(imgDil, imgContour)
 
-        imgContour = np.rot90(cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB))
+        imgContour = np.rot90(cv2.cvtColor(imgContour.copy(), cv2.COLOR_BGR2RGB)) 
 
         frame = pygame.transform.flip(frame, True, False)
 
-        window.blit(frame, (0, 0))
+        window.blit(frame, (0,0))
 
         pygame.display.update()
 
         clock.tick(fps)
-
-
-def check(shapeDict):
-    for shape in shapeDict:
-        if shapeDict[shape] >= 200:
-            print(shape)
 
 
 def main():
@@ -114,3 +110,4 @@ def main():
 
 
 main()
+
