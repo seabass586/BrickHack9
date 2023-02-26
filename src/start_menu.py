@@ -17,6 +17,7 @@ difficulty = 2
 res = 1280, 720
 screen = pygame.display.set_mode(res) 
 smallfont = pygame.font.SysFont('Comics Sans MS',40) 
+bigfont = pygame.font.SysFont('Roboto', 80)
 
 def start_screen():  
     while True:  
@@ -152,7 +153,7 @@ def loading_screen():
     video2 = video.resize((1280, 720))
     video2.preview()  
 
-def lose_screen():
+def lose_screen(points):
     new_bg = pygame.image.load("assets/timesup.png")
 
     while True:  
@@ -166,6 +167,8 @@ def lose_screen():
                 if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
                     pygame.quit()
                     sys.exit()
+
+        text = bigfont.render("Points: " + points, True, WHITE)
 
         mouse = pygame.mouse.get_pos() 
         new = pygame.transform.scale(new_bg, (1280, 720))
@@ -188,9 +191,11 @@ def lose_screen():
             img = pygame.transform.scale(img, (200, 90))
             screen.blit(img,(545,535)) 
 
+        screen.blit(text,(500, 315))
+        
         pygame.display.update() 
 
 def main():
-    lose_screen()
+    lose_screen("100")
 
 main()
