@@ -196,6 +196,6 @@ def loading_screen():
     video2.preview()  
 
 def main():
-    start_screen()
+    intro_scene()
 
 main()
