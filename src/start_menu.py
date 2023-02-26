@@ -1,7 +1,8 @@
 import pygame 
 import sys
 import moviepy.editor
-  
+import main 
+
 pygame.init() 
 pygame.display.set_caption("Shape It!")
 bg = pygame.image.load("assets/main_screen.png")
@@ -24,7 +25,7 @@ def start_screen():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     if difficulty == 1:
-                        print("Education Mode")
+                        main
                     if difficulty == 2:
                         print("Challenge Mode")
             if ev.type == pygame.MOUSEBUTTONDOWN:
@@ -130,6 +131,48 @@ def loading_screen():
     while True:
         video = moviepy.editor.VideoFileClip("assets/loading.mov")
         video.preview()
+
+def lose_screen():
+    new_bg = pygame.image.load("assets/timesup_placeholder.png")
+
+    while True:  
+        for ev in pygame.event.get():     
+            if ev.type == pygame.QUIT: 
+                pygame.quit()   
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
+                   start_screen()
+            if ev.type == pygame.MOUSEBUTTONDOWN: 
+                if 550 <= mouse[0] <= 610+140 and 535 <= mouse[1] <= 535+80: 
+                    pygame.quit()
+                    sys.exit()
+
+        text = smallfont.render("Mode: ", True, BLACK)
+
+        mouse = pygame.mouse.get_pos() 
+        new = pygame.transform.scale(new_bg, (1280, 720))
+        screen.blit(new, (0, 0))
+
+        if 550 <= mouse[0] <= 600+140 and 335 <= mouse[1] <= 335+80: 
+            img = pygame.image.load('assets/start_selected.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,320))
+        else: 
+            img = pygame.image.load('assets/start_button.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,320))
+        if 550 <= mouse[0] <= 600+140 and 535 <= mouse[1] <= 535+80: 
+            img = pygame.image.load('assets/exit_selected.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,545))
+        else: 
+            img = pygame.image.load('assets/exit_button.png')
+            img = pygame.transform.scale(img, (200, 90))
+            screen.blit(img,(545,545)) 
+
+        screen.blit(text,(950,680))
+
+        pygame.display.update() 
 
 def main():
     start_screen()

@@ -1,8 +1,7 @@
 import pygame
 import cv2
 import numpy as np
-import random
-
+import random   
 
 def empty(a):
     pass
