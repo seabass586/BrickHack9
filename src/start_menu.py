@@ -196,6 +196,6 @@ def loading_screen():
     video2.preview()  
 
 def main():
-    lose_screen("100")
+    start_screen()
 
 main()
