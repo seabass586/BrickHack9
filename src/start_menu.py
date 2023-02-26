@@ -132,6 +132,6 @@ def loading_screen():
         video.preview()
 
 def main():
-    loading_bar()
+    start_screen()
 
 main()
