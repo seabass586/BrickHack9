@@ -30,7 +30,7 @@ def start_screen():
                         video2.preview()
                         loading_screen()
                         pygame.quit()
-                        game.run()
+                        game.run(difficulty)
                         break
                     if difficulty == 2:
                         video = moviepy.editor.VideoFileClip("assets/intro.mov")
@@ -38,7 +38,7 @@ def start_screen():
                         video2.preview()
                         loading_screen()
                         pygame.quit()
-                        game.run()
+                        game.run(difficulty)
                         break
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 435 <= mouse[1] <= 435+80: 
