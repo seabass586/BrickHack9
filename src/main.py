@@ -62,7 +62,6 @@ def game_loop(webcam):
     shapeDict = {'Triangle': 0, 'Square': 0, 'Pentagon': 0, 
                      'Hexagon': 0, 'Octagon': 0}
 
-
     start = True
     while start:
         for event in pygame.event.get():
