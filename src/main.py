@@ -151,14 +151,16 @@ def game_loop(webcam):
             print ("Nice!!")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
-            offset+=2
+            if offset !=18:
+                offset+=2
             counter = 25 - offset
             print(task)
         elif check(shapeDict, task) == False:
             print ("NO!!!!! >:(")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
-            offset+=2
+            if offset !=18:
+                offset+=2
             counter = 25 - offset
             print(task)
 
