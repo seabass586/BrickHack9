@@ -25,7 +25,7 @@ def start_screen():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     if difficulty == 1:
-                        main
+                        game
                     if difficulty == 2:
                         print("Challenge Mode")
             if ev.type == pygame.MOUSEBUTTONDOWN:

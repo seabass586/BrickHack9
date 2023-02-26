@@ -107,8 +107,8 @@ def game_loop(webcam):
     shapeDict = {'triangle': 0, 'square': 0, 'pentagon': 0, 
                  'hexagon': 0, 'octagon': 0}
     
-    bg = pygame.image.load("src/assets/BORDER_GRAD.png").convert()
-    tessy1 = pygame.image.load("src/assets/tessy1.png")
+    bg = pygame.image.load("assets/BORDER_GRAD.png").convert()
+    tessy1 = pygame.image.load("assets/tessy1.png")
     bg_border = pygame.draw.rect(window, [  0,  0, 223], (1000,1000,25,25), 0)
 
     start = True
