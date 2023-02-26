@@ -3,7 +3,7 @@ import sys
   
 pygame.init() 
 pygame.display.set_caption("Shape It!")
-bg = pygame.image.load("assets/placeholder.jpg")
+bg = pygame.image.load("assets/main_screen.png")
 
 WHITE = (255,255,255) 
 GREY = (170,170,170)
@@ -15,10 +15,6 @@ screen = pygame.display.set_mode(res)
 smallfont = pygame.font.SysFont('Comics Sans MS',40) 
 
 def start_screen():  
-    text1 = smallfont.render("Start", True, WHITE)
-    text2 = smallfont.render("Mode", True, WHITE)
-    text3 = smallfont.render('Quit' , True , WHITE) 
-
     while True:  
         for ev in pygame.event.get():     
             if ev.type == pygame.QUIT: 
@@ -42,23 +38,24 @@ def start_screen():
         screen.blit(new, (0, 0))
 
         if 610 <= mouse[0] <= 610+140 and 450 <= mouse[1] <= 450+40: 
-            pygame.draw.rect(screen, GREY,[575,440,140,40]) 
+            img = pygame.image.load('assets/start_selected.png')
+            screen.blit(img,(575,440))
         else: 
-            pygame.draw.rect(screen, DARK_GREY, [575,440,140,40]) 
+            img = pygame.image.load('assets/start_button.png')
+            screen.blit(img,(575,440))
 
         if 610 <= mouse[0] <= 610+140 and 550 <= mouse[1] <= 550+40: 
-            pygame.draw.rect(screen, GREY,[575,535,140,40]) 
+            img = pygame.image.load('assets/mode_selected.png')
+            screen.blit(img,(575,535))
         else: 
-            pygame.draw.rect(screen,DARK_GREY,[575,535,140,40]) 
-
+            img = pygame.image.load('assets/mode_button.png')
+            screen.blit(img,(575,535))
         if 610 <= mouse[0] <= 610+140 and 625 <= mouse[1] <= 650+40: 
-            pygame.draw.rect(screen, GREY,[575,615,140,40]) 
+            img = pygame.image.load('assets/exit_selected.png')
+            screen.blit(img,(575,615))
         else: 
-            pygame.draw.rect(screen,DARK_GREY,[575,615,140,40]) 
-
-        screen.blit(text1, (610, 445)) 
-        screen.blit(text2, (610, 545)) 
-        screen.blit(text3, (610, 625)) 
+            img = pygame.image.load('assets/exit_button.png')
+            screen.blit(img,(575,615)) 
 
         pygame.display.update() 
 
