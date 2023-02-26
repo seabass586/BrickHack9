@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import random   
 
+IMAGE_TIME = 10
+
 def empty(a):
     pass
 
@@ -97,7 +99,6 @@ def game_loop(webcam):
     font = pygame.font.SysFont('Consolas', 30)
     text = font.render(str(counter), True, (0, 128, 0))
 
-
     time_delay = 1000
     timer_event = pygame.USEREVENT+1
     pygame.time.set_timer(timer_event, time_delay)
@@ -116,7 +117,7 @@ def game_loop(webcam):
 
     drawing = True
     task = get_shape()
-    print(task)
+    request = font.render("Draw me a... " + task, True, (255, 255, 255))
 
     while start:
         for event in pygame.event.get():
@@ -151,17 +152,19 @@ def game_loop(webcam):
             print ("Nice!!")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
+            request = font.render("Draw me a... " + task, True, (0, 0, 0))
             if offset !=18:
                 offset+=2
-            counter = 25 - offset
+            counter = 25 - offset + 4
             print(task)
         elif check(shapeDict, task) == False:
             print ("NO!!!!! >:(")
             shapeDict = clear_dict(shapeDict)
             task = get_shape()
+            request = font.render("Draw me a... " + task, True, (0, 0, 0))
             if offset !=18:
                 offset+=2
-            counter = 25 - offset
+            counter = 25 - offset + 4
             print(task)
 
         if counter == 0:
@@ -183,6 +186,7 @@ def game_loop(webcam):
         window.blit(frame, (155, 90))
 
         window.blit(text, (0,0))
+        window.blit(request, (440, 670))
         window.blit(tessy1, (0,0))
 
         pygame.display.flip()

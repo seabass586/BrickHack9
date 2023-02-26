@@ -11,7 +11,7 @@ WHITE = (255,255,255)
 GREY = (170,170,170)
 DARK_GREY = (100,100,100)
 BLACK = (0,0,0)
-difficulty = 0 
+difficulty = 2
 
 res = 1280, 720
 screen = pygame.display.set_mode(res) 
@@ -21,7 +21,7 @@ def start_screen():
     while True:  
         for ev in pygame.event.get():     
             if ev.type == pygame.QUIT: 
-                pygame.quit()   
+                pygame.quit() 
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if 550 <= mouse[0] <= 610+140 and 335 <= mouse[1] <= 335+80: 
                     if difficulty == 1:
